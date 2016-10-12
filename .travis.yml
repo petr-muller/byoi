@@ -4,4 +4,7 @@ python:
 
 install: "pip install -r requirements.txt"
 
-script: pylint --rcfile=.pylintrc interpreter.py && py.test test_*.py
+script: pylint --rcfile=.pylintrc interpreter.py && py.test --cov=. --cov-report=xml test_*.py
+
+after_success:
+  - python-codacy-coverage -r coverage.xml
